@@ -49,8 +49,7 @@ getLocation(CERT, fields = c("NAME", "CITY", "STNAME"), limit = 10000)
 \item{CBSA}{The code for the CBSA associated with the location.}
 \item{BKCLASS}{The bank class associated with the location.}
 \item{ADDRESS}{Address of the bank.}
-}
-# Please check dataTaxonomy("location")}
+}}
 }
 \value{
 A data frame containing location information for the bank.
@@ -64,6 +63,4 @@ getLocation(3850)
 
 # Get location information for a bank with CERT number 3850 and fields "NAME", "CITY", and "ZIP"
 getLocation(3850, fields = c("NAME", "CITY", "ZIP"))
-# Getting all location data for a bank.
-getLocation(3850 ,fields = dataTaxonomy("location")$Name)
 }

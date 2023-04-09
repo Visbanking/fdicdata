@@ -1,6 +1,6 @@
 Type: Package
 Package: fdicdata
-Title: An R package for accessing and analyzing FDIC bank data
+Title: An R Package for Accessing and Analyzing FDIC Bank Data
 Version: 0.1.0
 Authors@R: c(
     person("Ugur", "Dar", , "ugurdarr@gmail.com", role = c("aut", "cre")),
@@ -11,7 +11,7 @@ Description: The fdicdata R package provides a set of functions for
     (FDIC), including retrieving financial data for FDIC-insured
     institutions and accessing the data taxonomy.
 License: MIT + file LICENSE
-URL: https://github.com/visbanking/fdicdata, https://visbanking.com/opensource
+URL: https://github.com/visbanking/fdicdata, https://visbanking.com/opensource/
 BugReports: https://github.com/visbanking/fdicdata/issues
 Imports:
     dplyr,

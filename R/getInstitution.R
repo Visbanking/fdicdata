@@ -42,10 +42,10 @@ getInstitution <- function(name = NULL, IDRSSD_or_CERT = NULL, fields, IDRSSD = 
     df <- df %>%
       mutate(
         ID = NULL,
-        REPDTE =  as.Date(as.character(REPDTE), "%m/%d/%Y"),
-        IDRSSD = FED_RSSD
+        REPDTE =  as.Date(as.character(get('REPDTE')), "%m/%d/%Y"),
+        IDRSSD = get('FED_RSSD')
       )%>%
-      select(-FED_RSSD)
+      select(-'FED_RSSD')
 
     return(df)
   }, error = function(e) {

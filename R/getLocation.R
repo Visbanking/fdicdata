@@ -43,7 +43,6 @@
 #' \item{BKCLASS}{The bank class associated with the location.}
 #' \item{ADDRESS}{Address of the bank.}
 #' }
-#' # Please check dataTaxonomy("location")
 #' @return A data frame containing location information for the bank.
 #' @export
 #' @import dplyr
@@ -53,8 +52,6 @@
 #'
 #' # Get location information for a bank with CERT number 3850 and fields "NAME", "CITY", and "ZIP"
 #' getLocation(3850, fields = c("NAME", "CITY", "ZIP"))
-#' # Getting all location data for a bank.
-#' getLocation(3850 ,fields = dataTaxonomy("location")$Name)
 getLocation <- function(CERT, fields =c("NAME","CITY","STNAME"),limit = 10000){
   stopifnot(!missing(CERT))
   url <- paste0("https://banks.data.fdic.gov/api/locations?filters=CERT%3A",CERT,
@@ -70,7 +67,7 @@ getLocation <- function(CERT, fields =c("NAME","CITY","STNAME"),limit = 10000){
     df <- df %>%
       mutate(
         ID = NULL,
-        ESTYMD =  as.Date(as.character(ESTYMD), "%m/%d/%Y")
+        ESTYMD =  as.Date(as.character(get('ESTYMD')), "%m/%d/%Y")
       )
 
     return(df)

@@ -37,9 +37,9 @@ getFinancials <- function(IDRSSD_or_CERT, metrics, limit = 1, IDRSSD = TRUE, ran
     df <- df %>%
       mutate(
         ID = NULL,
-        DATE =  as.Date(as.character(REPDTE), "%Y%m%d")
+        DATE =  as.Date(as.character(get('REPDTE')), "%Y%m%d")
       ) %>%
-      select(-REPDTE) %>%
+      select(-'REPDTE') %>%
       rename("IDRSSD" = "RSSDID")
 
     return(df)

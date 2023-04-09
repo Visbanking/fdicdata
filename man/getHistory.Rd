@@ -24,5 +24,5 @@ This function retrieves the history of a bank by either its FDIC certificate num
 \examples{
 getHistory(CERT_or_NAME = 3850, c("INSTNAME","CERT","PCITY","PSTALP","PZIP5"))
 getHistory("Iland",fields=c("INSTNAME","CERT","PCITY","PSTALP","PZIP5"),CERT=FALSE)
-getHistory(CERT_or_NAME = "JP Morgan", fields =c("INSTNAME","CERT","PCITY","PSTALP","PZIP5"), CERT = FALSE)
+getHistory(CERT_or_NAME = "JP Morgan", fields = "INSTNAME", CERT = FALSE)
 }

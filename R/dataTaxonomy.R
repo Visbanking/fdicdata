@@ -8,8 +8,7 @@
 #' @export
 #' @references
 #' For more information on the FDIC API, visit https://banks.data.fdic.gov/.
-#' @examples
-#' # dataTaxonomy("institution")
+
 dataTaxonomy <- function(name){
 
   if(name == "institution"){

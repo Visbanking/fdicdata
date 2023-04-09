@@ -62,7 +62,7 @@ getFailures <- function(fields, range = NULL, limit = 10000){
     df <- df %>%
       mutate(
         ID = NULL,
-        FAILDATE =  as.Date(as.character(FAILDATE), "%m/%d/%Y")
+        FAILDATE =  as.Date(as.character(get('FAILDATE')), "%m/%d/%Y")
       )
     return(df)
   }, error = function(e) {
