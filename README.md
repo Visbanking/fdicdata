@@ -13,7 +13,7 @@ The fdicdata R package provides a set of functions for working with data from th
 ## Installation
 
 ``` r
-remotes::install_github("Visbanknig/fdicdata",ref="main")
+remotes::install_github("Visbanking/fdicdata",ref="main")
 ```
 
 ## Examples
