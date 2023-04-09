@@ -5,7 +5,7 @@
 #' @return A data frame containing the FDIC Institution data set
 #' @export
 #' @examples
-#' dataInstitutions <- getInstitutionsAll()
+#' #'\dontrun{dataInstitutions <- getInstitutionsAll()}
 #'
 #' @export
 getInstitutionsAll <- function(){

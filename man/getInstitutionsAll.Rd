@@ -13,6 +13,6 @@ A data frame containing the FDIC Institution data set
 This function reads the FDIC Institution data set from a URL (FDIC listing of all institutions) and returns it as a data frame.
 }
 \examples{
-dataInstitutions <- getInstitutionsAll()
+#'\dontrun{dataInstitutions <- getInstitutionsAll()}
 
 }
