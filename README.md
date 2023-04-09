@@ -1,3 +1,4 @@
+<img align="right" width="220" height="240" src="https://drive.google.com/uc?export=download&id=1PtkcqH3YYrlMaqz79pbWJosSVNW4hnba">
 
 # fdicdata
 
@@ -11,20 +12,8 @@ The fdicdata R package provides a set of functions for working with data from th
 
 ## Installation
 
-You can install the development version of fdicdata like so:
-
 ``` r
-#set config
-usethis::use_git_config(user.name = "YourName", user.email = "your@mail.com")
-
-#Go to github page to generate token
-usethis::create_github_token() 
-
-#paste your PAT into pop-up that follows...
-credentials::set_github_pat()
-
-#now remotes::install_github() will work
-remotes::install_github("Birddog-Partners/fdicdata",ref="main")
+remotes::install_github("Visbanknig/fdicdata",ref="main")
 ```
 
 ## Examples
