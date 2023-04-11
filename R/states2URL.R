@@ -5,6 +5,7 @@
 #' @param vec A vector of state names to be converted to URL-compatible format
 #'
 #' @return A string containing the state names in URL-compatible format
+
 states2URL <- function(vec) {
   stopifnot(!missing(vec))
   url_vec <- sprintf("%%22%s%%22", gsub(" ", "%20", vec))

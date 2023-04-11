@@ -15,6 +15,3 @@ a data frame containing the extracted taxonomy information
 \description{
 Extracts the taxonomy information for a given name
 }
-\references{
-For more information on the FDIC API, visit https://banks.data.fdic.gov/.
-}

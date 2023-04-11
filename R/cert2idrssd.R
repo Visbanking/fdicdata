@@ -9,6 +9,7 @@
 #' @examples
 #' cert2idrssd(3850)
 #' @export
+
 cert2idrssd <- function(CERT){
   tryCatch({
     df <- getFinancials(CERT,"FED_RSSD",IDRSSD = FALSE)
@@ -31,6 +32,7 @@ cert2idrssd <- function(CERT){
 #' @examples
 #' idrssd2cert(37)
 #' @export
+
 idrssd2cert <- function(IDRSSD){
   tryCatch({
     df <- getFinancials(IDRSSD,"CERT")

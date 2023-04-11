@@ -15,6 +15,7 @@
 #'
 #' @examples
 #' df <- getSummary(c("West Virginia", "Delaware", "Alabama"), c(2015, 2016), c("ASSET", "INTINC"))
+
 getSummary <- function(states, range, fields, limit = 10000){
   stopifnot(!missing(states), !missing(range),!missing(fields))
   if(!is.null(range)){ stopifnot(length(range) == 2) }

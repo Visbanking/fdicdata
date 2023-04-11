@@ -52,6 +52,7 @@
 #'
 #' # Get location information for a bank with CERT number 3850 and fields "NAME", "CITY", and "ZIP"
 #' getLocation(3850, fields = c("NAME", "CITY", "ZIP"))
+
 getLocation <- function(CERT, fields =c("NAME","CITY","STNAME"),limit = 10000){
   stopifnot(!missing(CERT))
   url <- paste0("https://banks.data.fdic.gov/api/locations?filters=CERT%3A",CERT,

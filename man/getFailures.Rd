@@ -45,5 +45,4 @@ specified, only failures within that range will be included.
 \examples{
 df <- getFailures(c("CERT", "NAME", "FAILDATE", "CITY", "STATE"), range = c(2010, 2015))
 head(df)
-
 }

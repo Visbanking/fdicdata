@@ -10,11 +10,10 @@
 #' @import dplyr
 #' @return A dataframe containing the requested financial data.
 #' @export
-#' @references
-#' For more information on the FDIC API, visit https://banks.data.fdic.gov/.
 #' @examples
 #' getFinancials(37, metrics = c("ASSET", "DEP"),limit = 10, range = c("2015-01-01","*"))
 #' getFinancials(37, metrics = c("ASSET", "DEP"),limit = 10, range = c("2015-01-01","2016-01-01"))
+
 getFinancials <- function(IDRSSD_or_CERT, metrics, limit = 1, IDRSSD = TRUE, range = NULL) {
   stopifnot(!missing(IDRSSD_or_CERT), !missing(metrics))
   stopifnot(is.numeric(IDRSSD_or_CERT))

@@ -6,8 +6,6 @@
 #' @import yaml
 #' @return a data frame containing the extracted taxonomy information
 #' @export
-#' @references
-#' For more information on the FDIC API, visit https://banks.data.fdic.gov/.
 
 dataTaxonomy <- function(name){
 

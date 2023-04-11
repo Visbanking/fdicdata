@@ -18,6 +18,7 @@
 #' For more information on the FDIC API, visit https://banks.data.fdic.gov/.
 #'
 #' @import dplyr
+
 getInstitution <- function(name = NULL, IDRSSD_or_CERT = NULL, fields, IDRSSD = TRUE, limit=10000){
   if(!is.null(name) && !is.null(IDRSSD_or_CERT)){
     stop("Please use only 'name' or 'IDRRSD_or_CERT' parameter.")

@@ -27,6 +27,3 @@ This function retrieves financial data for a given institution from the FDIC API
 getFinancials(37, metrics = c("ASSET", "DEP"),limit = 10, range = c("2015-01-01","*"))
 getFinancials(37, metrics = c("ASSET", "DEP"),limit = 10, range = c("2015-01-01","2016-01-01"))
 }
-\references{
-For more information on the FDIC API, visit https://banks.data.fdic.gov/.
-}

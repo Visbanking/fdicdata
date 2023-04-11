@@ -8,6 +8,7 @@
 #' #'\dontrun{dataInstitutions <- getInstitutionsAll()}
 #'
 #' @export
+
 getInstitutionsAll <- function(){
   message("It can takes few min")
   tryCatch({
