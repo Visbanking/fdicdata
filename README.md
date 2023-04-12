@@ -10,6 +10,7 @@
 
 The fdicdata R package provides a set of functions for working with data from the Federal Deposit Insurance Corporation (FDIC), including retrieving financial data for FDIC-insured institutions and accessing the data taxonomy.
 
+
 ## Installation
 
 ### From CRAN
