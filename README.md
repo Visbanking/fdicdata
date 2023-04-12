@@ -13,7 +13,7 @@ The fdicdata R package provides a set of functions for working with data from th
 
 ## Installation
 
-### From CRAN
+### From CRAN
 
 ```r 
 install.packages("fdicdata")
