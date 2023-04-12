@@ -5,7 +5,7 @@
 <!-- badges: start -->
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN status](https://www.r-pkg.org/badges/version/fdicdata)](https://cran.r-project.org/web/packages/fdicdata/index.html)
-
+[![](https://cranlogs.r-pkg.org/badges/fdicdata)](https://cran.rstudio.com/web/packages/fdicdata/index.html)
 <!-- badges: end -->
 
 The fdicdata R package provides a set of functions for working with data from the Federal Deposit Insurance Corporation (FDIC), including retrieving financial data for FDIC-insured institutions and accessing the data taxonomy.
