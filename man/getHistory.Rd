@@ -16,11 +16,15 @@ getHistory(CERT_or_NAME = NULL, fields, CERT = TRUE, limit = 10000)
 \item{limit}{An integer indicating the maximum number of records to retrieve (default and max is 10000).}
 }
 \value{
-A data frame containing the requested history information for the specified bank.
+A data frame containing the requested history information for the
+  specified bank, or \code{NULL} if the FDIC API is unreachable or returns
+  an error.
 }
 \description{
 This function retrieves the history of a bank by either its FDIC certificate number or name. The user can specify which fields to include in the output.
 }
 \examples{
-getHistory(CERT_or_NAME = 3850, c("INSTNAME","CERT","PCITY","PSTALP","PZIP5"))
+\donttest{
+getHistory(CERT_or_NAME = 3850, c("INSTNAME", "CERT", "PCITY", "PSTALP", "PZIP5"))
+}
 }

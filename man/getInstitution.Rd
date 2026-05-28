@@ -24,13 +24,16 @@ getInstitution(
 \item{limit}{An integer specifying the maximum number of records to retrieve. Default is 10000.}
 }
 \value{
-A data frame containing the institution data.
+A data frame containing the institution data, or \code{NULL} if the
+  FDIC API is unreachable or returns an error.
 }
 \description{
 This function retrieves institution data from the FDIC API based on the specified parameters.
 }
 \examples{
+\donttest{
 df <- getInstitution(name = "Bank of America", fields = c("NAME", "CITY", "STATE"))
+}
 
 }
 \references{

@@ -8,11 +8,14 @@
 #' @param IDRSSD_or_CERT IDRSSD or CERT of bank
 #' @param IDRSSD Default:TRUE functions uses IDRSSD, to using CERT change it FALSE
 #'
-#' @return A data frame containing the institution data.
+#' @return A data frame containing the institution data, or \code{NULL} if the
+#'   FDIC API is unreachable or returns an error.
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' df <- getInstitution(name = "Bank of America", fields = c("NAME", "CITY", "STATE"))
+#' }
 #'
 #' @references
 #' For more information on the FDIC API, visit https://banks.data.fdic.gov/.
@@ -35,11 +38,10 @@ getInstitution <- function(name = NULL, IDRSSD_or_CERT = NULL, fields, IDRSSD = 
     paste0("&limit=",limit),
     "&format=csv&download=false&filename=data_file"
   )
-  tryCatch({
-    suppressWarnings(
-      df <- read.csv(url,header=TRUE)
-    )
+  df <- .fetch_csv(url)
+  if (is.null(df) || nrow(df) == 0) return(df)
 
+  tryCatch({
     df <- df %>%
       mutate(
         ID = NULL,
@@ -47,10 +49,9 @@ getInstitution <- function(name = NULL, IDRSSD_or_CERT = NULL, fields, IDRSSD = 
         IDRSSD = get('FED_RSSD')
       )%>%
       select(-'FED_RSSD')
-
-    return(df)
+    df
   }, error = function(e) {
-    message("ERROR: ", conditionMessage(e))
-    return(NULL)
+    message("Could not post-process FDIC response: ", conditionMessage(e))
+    NULL
   })
 }

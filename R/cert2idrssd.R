@@ -4,21 +4,19 @@
 #'
 #' @param CERT An integer specifying the CERT number of the bank.
 #'
-#' @return An integer specifying the IDRSSD number of the bank. Returns NULL if there is an error.
+#' @return An integer specifying the IDRSSD number of the bank. Returns
+#'   \code{NULL} if there is an error or the FDIC API is unreachable.
 #'
 #' @examples
+#' \donttest{
 #' cert2idrssd(3850)
+#' }
 #' @export
 
 cert2idrssd <- function(CERT){
-  tryCatch({
-    df <- getFinancials(CERT,"FED_RSSD",IDRSSD = FALSE)
-    idrssd <- df$IDRSSD
-    return(idrssd)
-  }, error = function(e) {
-    message("ERROR: ", conditionMessage(e))
-    return(NULL)
-  })
+  df <- getFinancials(CERT, "FED_RSSD", IDRSSD = FALSE)
+  if (is.null(df)) return(NULL)
+  df$IDRSSD
 }
 
 #' Convert bank identifier from IDRSSD to CERT
@@ -27,19 +25,17 @@ cert2idrssd <- function(CERT){
 #'
 #' @param IDRSSD An integer specifying the IDRSSD number of the bank.
 #'
-#' @return An integer specifying the CERT number of the bank. Returns NULL if there is an error.
+#' @return An integer specifying the CERT number of the bank. Returns
+#'   \code{NULL} if there is an error or the FDIC API is unreachable.
 #'
 #' @examples
+#' \donttest{
 #' idrssd2cert(37)
+#' }
 #' @export
 
 idrssd2cert <- function(IDRSSD){
-  tryCatch({
-    df <- getFinancials(IDRSSD,"CERT")
-    cert <- df$CERT
-    return(cert)
-  }, error = function(e) {
-    message("ERROR: ", conditionMessage(e))
-    return(NULL)
-  })
+  df <- getFinancials(IDRSSD, "CERT")
+  if (is.null(df)) return(NULL)
+  df$CERT
 }

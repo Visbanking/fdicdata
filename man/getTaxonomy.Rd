@@ -7,9 +7,19 @@
 getTaxonomy(taxonomy)
 }
 \arguments{
-\item{taxonomy}{The name of the taxonomy file to download (one of "institution_properties.yaml", "location_properties.yaml", "history_properties.yaml", "summary_properties.yaml", "failure_properties.yaml", or "risview_properties.yaml")}
+\item{taxonomy}{The name of the taxonomy file to download (one of
+"institution_properties.yaml", "location_properties.yaml",
+"history_properties.yaml", "summary_properties.yaml",
+"failure_properties.yaml", or "risview_properties.yaml")}
+}
+\value{
+The local file path of the downloaded taxonomy file, or
+  \code{NULL} on failure.
 }
 \description{
-This function takes the name of the YAML file containing data taxonomy as an input
-and downloads it from the FDIC website, saving it to the local directory for later use.
+This function takes the name of the YAML file containing data taxonomy as
+an input and downloads it from the FDIC website, saving it to the local
+directory for later use. Returns the local file path on success, or
+\code{NULL} if the resource is unreachable or returns an error.
 }
+\keyword{internal}

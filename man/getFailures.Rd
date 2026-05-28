@@ -35,7 +35,8 @@ Defaults to 10,000.}
 }
 \value{
 a data frame containing the requested fields for each bank failure
-  within the specified date range (if applicable).
+  within the specified date range (if applicable), or \code{NULL} if the
+  FDIC API is unreachable or returns an error.
 }
 \description{
 This function retrieves information on bank failures from the FDIC data
@@ -43,6 +44,8 @@ API, using the specified fields and (optional) date range. If a date range is
 specified, only failures within that range will be included.
 }
 \examples{
+\donttest{
 df <- getFailures(c("CERT", "NAME", "FAILDATE", "CITY", "STATE"), range = c(2010, 2015))
 head(df)
+}
 }

@@ -43,15 +43,18 @@
 #' \item{BKCLASS}{The bank class associated with the location.}
 #' \item{ADDRESS}{Address of the bank.}
 #' }
-#' @return A data frame containing location information for the bank.
+#' @return A data frame containing location information for the bank, or
+#'   \code{NULL} if the FDIC API is unreachable or returns an error.
 #' @export
 #' @import dplyr
 #' @examples
+#' \donttest{
 #' # Get location information for a bank with CERT number 3850
 #' getLocation(3850)
 #'
-#' # Get location information for a bank with CERT number 3850 and fields "NAME", "CITY", and "ZIP"
+#' # Get location information for a bank with CERT number 3850 and selected fields
 #' getLocation(3850, fields = c("NAME", "CITY", "ZIP"))
+#' }
 
 getLocation <- function(CERT, fields =c("NAME","CITY","STNAME"),limit = 10000){
   stopifnot(!missing(CERT))
@@ -61,19 +64,18 @@ getLocation <- function(CERT, fields =c("NAME","CITY","STNAME"),limit = 10000){
                 paste0("&limit=",limit),
                 "&format=csv&download=false&filename=data_file")
 
+  df <- .fetch_csv(url)
+  if (is.null(df) || nrow(df) == 0) return(df)
+
   tryCatch({
-    suppressWarnings(
-      df <- read.csv(url,header=TRUE)
-    )
     df <- df %>%
       mutate(
         ID = NULL,
         ESTYMD =  as.Date(as.character(get('ESTYMD')), "%m/%d/%Y")
       )
-
-    return(df)
+    df
   }, error = function(e) {
-    message("ERROR: ", conditionMessage(e))
-    return(NULL)
+    message("Could not post-process FDIC response: ", conditionMessage(e))
+    NULL
   })
 }

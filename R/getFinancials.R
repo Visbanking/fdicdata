@@ -8,11 +8,14 @@
 #' @param IDRSSD Boolean value indicating whether IDRSSD (True) or CERT number (False) is used.
 #' @param range Character vector contains start and end date for range. Open ended ranges can be expressed using a "*"
 #' @import dplyr
-#' @return A dataframe containing the requested financial data.
+#' @return A dataframe containing the requested financial data, or \code{NULL}
+#'   if the FDIC API is unreachable or returns an error.
 #' @export
 #' @examples
-#' getFinancials(37, metrics = c("ASSET", "DEP"),limit = 10, range = c("2015-01-01","*"))
-#' getFinancials(37, metrics = c("ASSET", "DEP"),limit = 10, range = c("2015-01-01","2016-01-01"))
+#' \donttest{
+#' getFinancials(37, metrics = c("ASSET", "DEP"), limit = 10, range = c("2015-01-01", "*"))
+#' getFinancials(37, metrics = c("ASSET", "DEP"), limit = 10, range = c("2015-01-01", "2016-01-01"))
+#' }
 
 getFinancials <- function(IDRSSD_or_CERT, metrics, limit = 1, IDRSSD = TRUE, range = NULL) {
   stopifnot(!missing(IDRSSD_or_CERT), !missing(metrics))
@@ -29,10 +32,10 @@ getFinancials <- function(IDRSSD_or_CERT, metrics, limit = 1, IDRSSD = TRUE, ran
       "&offset=0&agg_term_fields=REPDTE&format=csv&download=false&filename=data_file"
     )
 
+  df <- .fetch_csv(url)
+  if (is.null(df) || nrow(df) == 0) return(df)
+
   tryCatch({
-    suppressWarnings(
-      df <- read.csv(url,header=TRUE)
-      )
     df <- df %>%
       mutate(
         ID = NULL,
@@ -40,10 +43,9 @@ getFinancials <- function(IDRSSD_or_CERT, metrics, limit = 1, IDRSSD = TRUE, ran
       ) %>%
       select(-'REPDTE') %>%
       rename("IDRSSD" = "RSSDID")
-
-    return(df)
+    df
   }, error = function(e) {
-    message("ERROR: ", conditionMessage(e))
-    return(NULL)
+    message("Could not post-process FDIC response: ", conditionMessage(e))
+    NULL
   })
 }

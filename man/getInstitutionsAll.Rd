@@ -7,12 +7,15 @@
 getInstitutionsAll()
 }
 \value{
-A data frame containing the FDIC Institution data set
+A data frame containing the FDIC Institution data set, or
+  \code{NULL} if the resource is unreachable or returns an error.
 }
 \description{
-This function reads the FDIC Institution data set from a URL (FDIC listing of all institutions) and returns it as a data frame.
+This function reads the FDIC Institution data set from a URL (FDIC listing
+of all institutions) and returns it as a data frame.
 }
 \examples{
-#'\dontrun{dataInstitutions <- getInstitutionsAll()}
-
+\donttest{
+dataInstitutions <- getInstitutionsAll()
+}
 }

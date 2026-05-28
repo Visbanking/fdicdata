@@ -29,14 +29,16 @@
 #'   Defaults to 10,000.
 #'
 #' @return a data frame containing the requested fields for each bank failure
-#'   within the specified date range (if applicable).
+#'   within the specified date range (if applicable), or \code{NULL} if the
+#'   FDIC API is unreachable or returns an error.
 #' @import dplyr
-#' @importFrom utils read.csv
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' df <- getFailures(c("CERT", "NAME", "FAILDATE", "CITY", "STATE"), range = c(2010, 2015))
 #' head(df)
+#' }
 
 getFailures <- function(fields, range = NULL, limit = 10000){
   stopifnot(!missing(fields))
@@ -55,18 +57,18 @@ getFailures <- function(fields, range = NULL, limit = 10000){
     paste0("&limit=",limit),
     "&format=csv&download=false&filename=data_file"
   )
+  df <- .fetch_csv(url)
+  if (is.null(df) || nrow(df) == 0) return(df)
+
   tryCatch({
-    suppressWarnings(
-      df <- read.csv(url,header=TRUE)
-    )
     df <- df %>%
       mutate(
         ID = NULL,
         FAILDATE =  as.Date(as.character(get('FAILDATE')), "%m/%d/%Y")
       )
-    return(df)
+    df
   }, error = function(e) {
-    message("ERROR: ", conditionMessage(e))
-    return(NULL)
+    message("Could not post-process FDIC response: ", conditionMessage(e))
+    NULL
   })
 }

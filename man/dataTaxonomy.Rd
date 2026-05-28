@@ -7,11 +7,14 @@
 dataTaxonomy(name)
 }
 \arguments{
-\item{name}{the name of the taxonomy file to extract. Available taxonomy names: "institution","location","history","summary","failure","financial".}
+\item{name}{the name of the taxonomy file to extract. Available taxonomy
+names: "institution", "location", "history", "summary", "failure",
+"financial".}
 }
 \value{
-a data frame containing the extracted taxonomy information
+a data frame containing the extracted taxonomy information, or
+  \code{NULL} if the FDIC resource is unreachable or returns an error.
 }
 \description{
-Extracts the taxonomy information for a given name
+Extracts the taxonomy information for a given name.
 }

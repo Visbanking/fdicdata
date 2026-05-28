@@ -10,11 +10,14 @@
 #' @param fields a character vector of field names to include in the output data frame
 #' @param limit an integer specifying the maximum number of rows to retrieve from the API
 #' @import dplyr
-#' @return a data frame with summary data for the given states, years, and fields
+#' @return a data frame with summary data for the given states, years, and
+#'   fields, or \code{NULL} if the FDIC API is unreachable or returns an error.
 #' @export
 #'
 #' @examples
+#' \donttest{
 #' df <- getSummary(c("West Virginia", "Delaware", "Alabama"), c(2015, 2016), c("ASSET", "INTINC"))
+#' }
 
 getSummary <- function(states, range, fields, limit = 10000){
   stopifnot(!missing(states), !missing(range),!missing(fields))
@@ -37,17 +40,17 @@ getSummary <- function(states, range, fields, limit = 10000){
     paste0("&limit=",limit),
     "&format=csv&download=false&filename=data_file"
   )
+  df <- .fetch_csv(url)
+  if (is.null(df) || nrow(df) == 0) return(df)
+
   tryCatch({
-    suppressWarnings(
-      df <- read.csv(url,header=TRUE)
-    )
     df <- df %>%
       mutate(
         ID = NULL
       )
-    return(df)
+    df
   }, error = function(e) {
-    message("ERROR: ", conditionMessage(e))
-    return(NULL)
+    message("Could not post-process FDIC response: ", conditionMessage(e))
+    NULL
   })
 }

@@ -4,7 +4,7 @@
 <!-- badges: start -->
 [![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html#stable)
 [![CRAN status](https://www.r-pkg.org/badges/version/fdicdata)](https://cran.r-project.org/package=fdicdata)
-[![](https://cranlogs.r-pkg.org/badges/fdicdata)](https://cran.rstudio.com/web/packages/fdicdata/index.html)
+[![](https://cranlogs.r-pkg.org/badges/fdicdata)](https://CRAN.R-project.org/package=fdicdata)
 [![](http://cranlogs.r-pkg.org/badges/last-week/fdicdata?color=green)](https://cran.r-project.org/package=fdicdata)
 <!-- badges: end -->
 

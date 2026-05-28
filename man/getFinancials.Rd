@@ -18,12 +18,15 @@ getFinancials(IDRSSD_or_CERT, metrics, limit = 1, IDRSSD = TRUE, range = NULL)
 \item{range}{Character vector contains start and end date for range. Open ended ranges can be expressed using a "*"}
 }
 \value{
-A dataframe containing the requested financial data.
+A dataframe containing the requested financial data, or \code{NULL}
+  if the FDIC API is unreachable or returns an error.
 }
 \description{
 This function retrieves financial data for a given institution from the FDIC API.
 }
 \examples{
-getFinancials(37, metrics = c("ASSET", "DEP"),limit = 10, range = c("2015-01-01","*"))
-getFinancials(37, metrics = c("ASSET", "DEP"),limit = 10, range = c("2015-01-01","2016-01-01"))
+\donttest{
+getFinancials(37, metrics = c("ASSET", "DEP"), limit = 10, range = c("2015-01-01", "*"))
+getFinancials(37, metrics = c("ASSET", "DEP"), limit = 10, range = c("2015-01-01", "2016-01-01"))
+}
 }

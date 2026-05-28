@@ -10,11 +10,14 @@ idrssd2cert(IDRSSD)
 \item{IDRSSD}{An integer specifying the IDRSSD number of the bank.}
 }
 \value{
-An integer specifying the CERT number of the bank. Returns NULL if there is an error.
+An integer specifying the CERT number of the bank. Returns
+  \code{NULL} if there is an error or the FDIC API is unreachable.
 }
 \description{
 This function takes a bank's IDRSSD number as input and returns the corresponding CERT number.
 }
 \examples{
+\donttest{
 idrssd2cert(37)
+}
 }

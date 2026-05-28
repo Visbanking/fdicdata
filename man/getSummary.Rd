@@ -17,7 +17,8 @@ years to filter by. If NULL, no year filtering will occur.}
 \item{limit}{an integer specifying the maximum number of rows to retrieve from the API}
 }
 \value{
-a data frame with summary data for the given states, years, and fields
+a data frame with summary data for the given states, years, and
+  fields, or \code{NULL} if the FDIC API is unreachable or returns an error.
 }
 \description{
 This function retrieves summary data from the FDIC API based on given state names,
@@ -25,5 +26,7 @@ a range of years, and specified fields. The returned data frame includes columns
 for state name, year, CB_SI, and the specified fields.
 }
 \examples{
+\donttest{
 df <- getSummary(c("West Virginia", "Delaware", "Alabama"), c(2015, 2016), c("ASSET", "INTINC"))
+}
 }

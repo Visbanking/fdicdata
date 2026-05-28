@@ -52,15 +52,18 @@ getLocation(CERT, fields = c("NAME", "CITY", "STNAME"), limit = 10000)
 }}
 }
 \value{
-A data frame containing location information for the bank.
+A data frame containing location information for the bank, or
+  \code{NULL} if the FDIC API is unreachable or returns an error.
 }
 \description{
 This function retrieves location information for a bank with a given CERT number from the Federal Deposit Insurance Corporation (FDIC) database.
 }
 \examples{
+\donttest{
 # Get location information for a bank with CERT number 3850
 getLocation(3850)
 
-# Get location information for a bank with CERT number 3850 and fields "NAME", "CITY", and "ZIP"
+# Get location information for a bank with CERT number 3850 and selected fields
 getLocation(3850, fields = c("NAME", "CITY", "ZIP"))
+}
 }

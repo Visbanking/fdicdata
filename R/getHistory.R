@@ -7,11 +7,15 @@
 #' @param CERT A logical value indicating whether the value in CERT_or_NAME is a FDIC certificate number (default is TRUE).
 #' @param limit An integer indicating the maximum number of records to retrieve (default and max is 10000).
 #'
-#' @return A data frame containing the requested history information for the specified bank.
+#' @return A data frame containing the requested history information for the
+#'   specified bank, or \code{NULL} if the FDIC API is unreachable or returns
+#'   an error.
 #' @export
 #'
 #' @examples
-#' getHistory(CERT_or_NAME = 3850, c("INSTNAME","CERT","PCITY","PSTALP","PZIP5"))
+#' \donttest{
+#' getHistory(CERT_or_NAME = 3850, c("INSTNAME", "CERT", "PCITY", "PSTALP", "PZIP5"))
+#' }
 
 getHistory <- function(CERT_or_NAME = NULL, fields, CERT=TRUE, limit=10000){
   stopifnot(!missing(fields))
@@ -26,17 +30,17 @@ getHistory <- function(CERT_or_NAME = NULL, fields, CERT=TRUE, limit=10000){
     paste0("&limit=",limit),
     "&format=csv&download=false&filename=data_file"
   )
+  df <- .fetch_csv(url)
+  if (is.null(df) || nrow(df) == 0) return(df)
+
   tryCatch({
-    suppressWarnings(
-      df <- read.csv(url,header=TRUE)
-    )
     df <- df %>%
       mutate(
         ID = NULL
       )
-    return(df)
+    df
   }, error = function(e) {
-    message("ERROR: ", conditionMessage(e))
-    return(NULL)
+    message("Could not post-process FDIC response: ", conditionMessage(e))
+    NULL
   })
 }
