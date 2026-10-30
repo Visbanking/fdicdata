@@ -1,0 +1,34 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  r-package:
+    runs-on: ${{ fromJSON(vars.CI_RUNNER_LABELS || '["ubuntu-latest"]') }}
+    container:
+      image: rocker/r-ver:4.4.1
+    timeout-minutes: 40
+    env:
+      DEBIAN_FRONTEND: noninteractive
+    steps:
+      - name: System dependencies
+        run: |
+          apt-get update
+          apt-get install --yes --no-install-recommends git libcurl4-openssl-dev libssl-dev libxml2-dev libfontconfig1-dev libfreetype6-dev libpng-dev libjpeg-dev libharfbuzz-dev libfribidi-dev libtiff5-dev pandoc
+      - uses: actions/checkout@v4
+      - name: Install R dependencies
+        shell: Rscript {0}
+        run: |
+          options(repos = c(CRAN = "https://packagemanager.posit.co/cran/__linux__/jammy/latest"))
+          install.packages(c("remotes", "testthat"))
+          remotes::install_deps(dependencies = TRUE)
+      - name: Run package tests
+        shell: Rscript {0}
+        run: testthat::test_local(stop_on_failure = TRUE)
